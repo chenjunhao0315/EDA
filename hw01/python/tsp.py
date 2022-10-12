@@ -1,5 +1,6 @@
 from parser import Parser
 import copy
+import argparse
 
 class TSP:
     def __init__(self, filepath, ):
@@ -57,9 +58,17 @@ class TSP:
 
         return self.g[k, a]
 
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input_file', default='./g1.dat')
+
+    return parser.parse_args()
+
 
 if __name__ == '__main__':
-    Input_file = 'g1.dat'
+    args = parse_arguments()
+
+    Input_file = args.input_file
     tour = TSP(Input_file)
     tour.solve()
 
