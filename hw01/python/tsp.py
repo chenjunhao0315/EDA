@@ -15,7 +15,7 @@ class TSP:
         self.n = len(self.matrix)
         #print(self.matrix)
         #print(self.table)
-        #print(self.n)
+        print(self.n)
 
     def solve(self):
         self.generate_matrix(self.Parser)
@@ -23,7 +23,7 @@ class TSP:
         for x in range(1, self.n):
             self.g[x + 1, ()] = self.matrix[x][0]
 
-        self.get_minimum(1, (2,3,4,5,6))
+        self.get_minimum(1, tuple(range(2, self.n + 1)))
 
         print('\n\nSolution to TSP: {' ,self.table[0], ',' , end='')
         solution = self.pl.pop()
