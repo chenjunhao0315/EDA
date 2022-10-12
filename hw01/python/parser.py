@@ -40,3 +40,10 @@ class Parser():
 
         return matrix
 
+    def generate_convert_table(self):
+        table = [None] * len(self.vertices)
+        for key, value in self.vertices.items():
+            table[value] = key
+
+        return table
+
