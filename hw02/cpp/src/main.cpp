@@ -138,8 +138,8 @@ int main(int argc, const char* argv[]) {
 		cout<<endl<<"The partitions are separated by newline"<<endl;
 		for (i = 0; i < ans.size(); i++)
 		{ 
-	    	if(ans[i]!=-1)
-	    		cout<<ans[i]<<" ";
+	    	if(ans[i] != -1)
+	    		cout << graph.convert_table[ans[i]] << " ";
 	    	else
 	    		cout<<endl;
 		}		

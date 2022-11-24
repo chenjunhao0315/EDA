@@ -10,8 +10,10 @@ class Graph {
 public:
     void buildEdgeSet(map<pair<int, int>, int>& E, const char* filepath);
     int nodes(); 
-private:
+   
+public:
     std::map<std::string, int> index_table;
+    std::map<int, std::string> convert_table;
 };
 
 struct Edge {
