@@ -101,8 +101,15 @@ void KLAlgo(map<pair<int, int>, int>& edgeSet, vector<int>& ans, vector<int>& pe
     ans.push_back(-1);
 }
 
-int main() {
+int main(int argc, const char* argv[]) {
     int i, nodes, K1, start_s, stop_s, inodes;
+
+    if (argc < 2) {
+        fprintf(stderr, "Usage %s [filepath]\n", argv[0]);
+
+        return -1;
+    }
+
     cout << "Enter the partitions in which the graph should be divided ";
     cin >> K1;
 
@@ -110,9 +117,9 @@ int main() {
     vector<int> ans;
 
     Graph graph;
-    nodes = graph.Nodes();
+    graph.buildEdgeSet(edgeSet, argv[1]);
+    nodes = graph.nodes();
     inodes = nodes;
-    graph.buildEdgeSet(edgeSet);
 
     vector<int> permanent_lock(nodes, false);
     vector<int> D(nodes, 0);

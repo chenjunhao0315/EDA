@@ -1,31 +1,35 @@
 #include "Graph.h"
 #include <fstream>
 #include <vector>
+#include <string>
 
-void Graph::buildEdgeSet(map<pair<int, int>, int>& E) {
-    int i, edges, flag = 0;
+void Graph::buildEdgeSet(map<pair<int, int>, int>& E, const char *filepath) {
+    std::ifstream in;
+    std::vector<Edge> edges;
+    int index = 0;
 
-    ifstream is1("from.txt");
-    istream_iterator<int> start1(is1), end1;
-    vector<int> initialNode(start1, end1);
+	in.open(filepath);
 
-    ifstream is2("to.txt");
-    istream_iterator<int> start2(is2), end2;
-    vector<int> finalNode(start2, end2);
+	if (in.fail()) return;
 
-    ifstream is3("weight.txt");
-    istream_iterator<int> start3(is3), end3;
-    vector<int> weight(start3, end3);
+	while (!in.eof()) {
+		Edge edge;
+			
+		if (!(in >> edge.v1 >> edge.v2 >> edge.weight)) break;
 
-    edges = initialNode.size();
-    for (i = 0; i < edges; ++i) {
-        E[make_pair(initialNode[i], finalNode[i])] = weight[i];
+        if (index_table.find(edge.v1) != index_table.end())
+            index_table[edge.v1] = index++;
+        if (index_table.find(edge.v2) != index_table.end())
+            index_table[edge.v2] = index++;
+
+		edges.push_back(edge);
+	}
+
+    for (size_t i = 0; i < edges.size(); ++i) {
+        E[make_pair(index_table[edges[i].v1], index_table[edges[i].v2])] = edges[i].weight;
     }
 }
 
-int Graph::Nodes() {
-    int nodes;
-    ifstream is4("vertices.txt");
-    is4 >> nodes;
-    return nodes;
+int Graph::nodes() {
+    return index_table.size();
 }
