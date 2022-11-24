@@ -1,4 +1,5 @@
 #include "DValue.h"
+#include <algorithm>
 
 DValue::DValue(int nodes) {
     this->nodes = nodes;
